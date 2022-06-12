@@ -1,0 +1,25 @@
+Next step logic in the game
+
+Menu -> Gui to pause/play, set the speed
+    - Pop out menu
+    - Slider
+    - Animation
+
+Menu -> Change the board size, checkbox to make them square
+    - pop out menu
+    - change board sizing
+    - square lock
+    - pixels or vw/vh..?
+
+Menu -> Change the styling of alive & dead cells, background, menu theme, save & load presets
+    - Pop out menu
+    - Style of alive colors, outline, gap
+    - menu theme
+    - save presets
+    - view presets
+    - select presets
+    - hexagon vs square
+
+Menu -> Load saved maps & known patterns into the game
+    - pop out menu
+    - Storage & loading of different boards
