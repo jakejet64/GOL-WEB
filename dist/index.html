@@ -5,10 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game of Life</title>
-    <script src="main.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
+    <script src="bundle.js" defer></script>
 </head>
 <body>
+    <div class="playbackMenu">
+        <div class="speedContainer">
+            <div class="speed"></div>
+            <input type="Range" name="playbackSpeed" min="50" max="1500" step="50" value="400">    
+        </div>
+        <div class="play inactive"></div>        
+        <div class="pause"></div>
+    </div>
     <div class="board"></div>
     
 </body>

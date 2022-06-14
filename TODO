@@ -1,9 +1,9 @@
-Next step logic in the game
+add a .gitignore for the node_modules
 
 Menu -> Gui to pause/play, set the speed
-    - Pop out menu
-    - Slider
-    - Animation
+-    - HTML menu
+-    - Hook up Speed
+-    - Hook up Play/Pause
 
 Menu -> Change the board size, checkbox to make them square
     - pop out menu
