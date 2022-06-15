@@ -141,6 +141,22 @@ export default class UI {
                 UI.play();
             }
         });
+
+        document.querySelector('.refresh').addEventListener('click', () => {
+            UI.refreshBoard();
+        });
+    }
+
+    static refreshBoard() {
+        if(this.playing){
+            UI.pause();
+            this.board = new Board(this.board.getRows(), this.board.getCols());
+            UI.drawBoard();
+            UI.play();
+        }else{
+            this.board = new Board(this.board.getRows(), this.board.getCols());
+            UI.drawBoard();
+        }
     }
 
     static play() {
