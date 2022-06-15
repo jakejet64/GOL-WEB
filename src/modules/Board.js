@@ -10,6 +10,14 @@ export default class Board {
         }
     }
 
+    getRows() {
+        return this.boolBoard.length;
+    }
+
+    getCols() {
+        return this.boolBoard[0].length
+    }
+
     getBoard(){
         return this.boolBoard;
     }
@@ -72,7 +80,7 @@ export default class Board {
     }
 
     determineInitLife(){
-        if(Math.random() > .7){
+        if(Math.random() < .4){
             return true;
         }else{
             return false;

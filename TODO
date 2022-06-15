@@ -6,10 +6,10 @@ Menu -> Gui to pause/play, set the speed
 -    - Hook up Play/Pause
 
 Menu -> Change the board size, checkbox to make them square
-    - pop out menu
-    - change board sizing
-    - square lock
-    - pixels or vw/vh..?
+-    - pop out menu
+-    - change board sizing
+-    - square lock
+-    - pixels or vw/vh..?
 
 Menu -> Change the styling of alive & dead cells, background, menu theme, save & load presets
     - Pop out menu

@@ -3,6 +3,18 @@
     font-size: 16px;
     margin: 0px;
     padding: 0px;
+    overflow: hidden;
+    
+    --rows: 200;
+    --cols: 100;
+
+    --border-radius: 6px;
+    --menu-primary: white;
+    --menu-background: rgba(128, 128, 128, 0.781);
+    --background: rgb(149, 149, 149);
+    /* --alive-color is both the color of the cells & menu accent color */
+    --alive-color: rgb(214, 142, 7);
+    --shadow-color: rgb(123, 123, 123);
 }
 
 body {
@@ -11,72 +23,155 @@ body {
 
 .board {
     margin: 0px;
-    background-color: rgb(213, 213, 213);
+    background-color: var(--background);
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template: repeat(100, 1fr) / repeat(50, 1fr);
-    gap: 0px;
+    grid-template: repeat(var(--rows), 1fr) / repeat(var(--cols), 1fr);
+    gap: 1px;
 }
 
 .alive {
-    background-color: rgb(36, 180, 36);
+    background-color: var(--alive-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--menu-primary);
 }
 
-.dead {
+.resizeMenu {
+    bottom: 30vh;
+    position: absolute;
 
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+
+    /* next two lines center */
+    left: calc(100vw - 95px);
+
+    background-color: var(--menu-background);
+    border: 3px solid var(--menu-primary);
+    border-radius: calc(var(--border-radius) * 2);
+
+    box-shadow: 0px 0px 15px var(--shadow-color);
+}
+
+.resizeMenu.open{
+    transform: translateX(-450px);
+}
+
+.resizeMenu div {
+    margin: 5px;
+}
+
+.rowIcon,
+.colIcon {
+    width: 50px;
+    height: 50px;
+    margin-left: 8px;
+}
+
+.openResizeMenu,
+.resizeMenuIcon,
+.locked {
+    width: 35px;
+    height: 35px;
+}
+
+.resizeMenu .locked {
+    margin-left: 16px;
+}
+
+/* make play/pause button "pop" upon clicking */
+.openResizeMenu:active,
+.locked:active {
+    transform: scale(1.075);
 }
 
 .playbackMenu {
-    padding: 10px;
-    height: 50px;
     position: absolute;
     bottom: 1vh;
-    
+
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+
     /* next two lines center */
     left: 50%;
     transform: translate(-50%, 0);
 
-    background-color: rgba(171, 171, 171, 0.505);
-    border-radius: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 3px solid white;
+
+    background-color: var(--menu-background);
+    border: 3px solid var(--menu-primary);
+    border-radius: calc(var(--border-radius) * 2);
+
+    box-shadow: 0px 0px 15px rgb(123, 123, 123);
 }
 
-.playbackMenu .speedContainer {
-    display: flex;
+.playbackMenu div {
+    margin: 5px;
 }
 
-.playbackMenu div:not(.speedContainer) {
-    height: 50px;
+.play,
+.pause {
     width: 50px;
-    margin: 10px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    filter: invert();
+    height: 50px;
 }
 
-.playbackMenu input {
-    width: auto;
-    margin-right: 20px;
+.speed {
+    width: 35px;
+    height: 35px;
+}
+
+div svg{
+    fill: var(--menu-primary);
+    margin: 0;
+    width: inherit;
+    height: inherit;
+}
+
+/* make play/pause button "pop" upon clicking */
+.play:active,
+.pause:active {
+    transform: scale(1.075);
+}
+
+.playbackSpeed {
+    margin-right: 16px;
+}
+
+.cols {
+    margin-right: 100px;
+}
+
+input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: calc(var(--border-radius) * 2);  
+    background: var(--menu-primary);
+    outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 100%; 
+    background: var(--alive-color);
+    border: 2px solid var(--menu-primary);
+    cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb:active {
+    transform: scale(1.075);
+    box-shadow: 0px 0px 10px var(--shadow-color);
+}
+
+.grayedOut {
     filter: grayscale();
-}
-
-.playbackMenu .speedContainer .speed {
-    background-image: url('./icons/speedometer.svg');
-    height: 40px;
-    width: 40px;
-}
-
-.playbackMenu .play {
-    background-image: url('./icons/play-circle-outline.svg');
-}
-
-.playbackMenu .pause {
-    background-image: url('./icons/pause-circle-outline.svg');
+    filter: opacity(.7);
 }
 
 .inactive {
