@@ -8,12 +8,13 @@
     --rows: 200;
     --cols: 100;
 
-    --border-radius: 6px;
-    --menu-primary: white;
-    --menu-background: rgba(128, 128, 128, 0.781);
-    --background: rgb(149, 149, 149);
-    /* --alive-color is both the color of the cells & menu accent color */
-    --alive-color: rgb(214, 142, 7);
+    --primary-color: rgb(214, 142, 7);
+    --secondary-color: rgb(255, 255, 255);
+    --background-color: rgb(149, 149, 149);
+
+    --border-radius: 5px;
+
+    --menu-background: rgba(176, 176, 176, 0.857);
     --shadow-color: rgb(123, 123, 123);
 }
 
@@ -23,7 +24,7 @@ body {
 
 .board {
     margin: 0px;
-    background-color: var(--background);
+    background-color: var(--background-color);
     height: 100vh;
     width: 100vw;
     display: grid;
@@ -32,13 +33,47 @@ body {
 }
 
 .alive {
-    background-color: var(--alive-color);
+    background-color: var(--primary-color);
     border-radius: var(--border-radius);
-    border: 1px solid var(--menu-primary);
+    border: 1px solid var(--secondary-color);
 }
 
-.resizeMenu {
-    bottom: 30vh;
+.colorPickerUI {
+    position: absolute;
+    bottom: calc(40vh + 60px);
+    right: 1vw;
+
+    background-color: var(--menu-background);
+    border: 3px solid var(--secondary-color);
+    border-radius: 170px 170px calc(var(--border-radius) * 2) calc(var(--border-radius) * 2);
+    padding: 15px;
+
+    box-shadow: 0px 0px 15px var(--shadow-color);
+}
+
+.colorPickerUI .cancel,
+.colorPickerUI .submit {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 48px;
+}
+
+.colorPickerUI .cancel {
+    left: 10px;
+}
+
+.colorPickerUI .submit {
+    right: 10px;
+}
+
+.colorPickerUI .cancel:active,
+.colorPickerUI .submit:active {
+    transform: scale(1.075);
+}
+
+.styleMenu {
+    bottom: calc(40vh - 20px);
     position: absolute;
 
     display: grid;
@@ -50,7 +85,84 @@ body {
     left: calc(100vw - 95px);
 
     background-color: var(--menu-background);
-    border: 3px solid var(--menu-primary);
+    border: 3px solid var(--secondary-color);
+    border-radius: calc(var(--border-radius) * 2);
+
+    box-shadow: 0px 0px 15px var(--shadow-color);
+}
+
+.selected svg {
+    filter: drop-shadow(0px 0px 10px var(--shadow-color));
+
+}
+
+.styleMenu.open{
+    transform: translateX(-450px);
+}
+
+.styleMenu div {
+    margin: 5px;
+}
+
+.openStyleMenu,
+.styleMenuIcon,
+.saveStyle {
+    width: 35px;
+    height: 35px;
+}
+
+.primaryColor,
+.secondaryColor,
+.backgroundColor,
+.borderRadiusIcon {
+    width: 50px;
+    height: 50px;
+}
+
+.openStyleMenu:active,
+.primaryColor:active,
+.secondaryColor:active,
+.backgroundColor:active,
+.saveStyle:active {
+    transform: scale(1.075);
+}
+
+.styleMenu .saveStyle {
+    margin-right: 100px;
+}
+
+.styleMenu .styleMenuIcon,
+.styleMenu .backgroundColor,
+.styleMenu .borderRadius {
+    margin-right: 14px;
+}
+
+.primaryColor svg {
+    fill: var(--primary-color);
+}
+
+.secondaryColor svg {
+    fill: var(--secondary-color);
+}
+
+.backgroundColor svg {
+    fill: var(--background-color);
+}
+
+.resizeMenu {
+    bottom: calc(40vh - 100px);
+    position: absolute;
+
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+
+    /* next two lines center */
+    left: calc(100vw - 95px);
+
+    background-color: var(--menu-background);
+    border: 3px solid var(--secondary-color);
     border-radius: calc(var(--border-radius) * 2);
 
     box-shadow: 0px 0px 15px var(--shadow-color);
@@ -103,7 +215,7 @@ body {
 
 
     background-color: var(--menu-background);
-    border: 3px solid var(--menu-primary);
+    border: 3px solid var(--secondary-color);
     border-radius: calc(var(--border-radius) * 2);
 
     box-shadow: 0px 0px 15px rgb(123, 123, 123);
@@ -130,7 +242,7 @@ body {
 }
 
 div svg{
-    fill: var(--menu-primary);
+    fill: var(--secondary-color);
     margin: 0;
     width: inherit;
     height: inherit;
@@ -161,7 +273,7 @@ input[type='range'] {
     appearance: none;
     height: 4px;
     border-radius: calc(var(--border-radius) * 2);  
-    background: var(--menu-primary);
+    background: var(--secondary-color);
     outline: none;
 }
 
@@ -171,8 +283,8 @@ input[type='range']::-webkit-slider-thumb {
     width: 18px;
     height: 18px;
     border-radius: 100%; 
-    background: var(--alive-color);
-    border: 2px solid var(--menu-primary);
+    background: var(--primary-color);
+    border: 2px solid var(--secondary-color);
     cursor: pointer;
 }
 input[type='range']::-webkit-slider-thumb:active {

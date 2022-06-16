@@ -1,4 +1,6 @@
 import Board from './Board.js';
+// imported color picker
+import iro from '@jaames/iro';
 
 export default class UI {
     static board = new Board(50, Math.round(window.innerWidth / (window.innerHeight / 50)));
@@ -9,6 +11,8 @@ export default class UI {
         UI.drawBoard();
     }, this.playbackSpeed);
     static playing = true;
+    static colorPicker = new iro.ColorPicker('#picker');
+    static currentColorBeingPicked = 'none';
 
     static loadHomepage(){
         UI.adjustCSSRowsCols();
@@ -16,6 +20,83 @@ export default class UI {
         UI.drawBoard();
         UI.addPlaybackMenuListeners();
         UI.addResizeMenuListeners();
+        UI.addStyleMenuListeners();
+    }
+
+    static addStyleMenuListeners(){
+        // open the style menu
+        document.querySelector('.openStyleMenu .open').addEventListener('click', () => {
+            document.querySelector('.openStyleMenu .open').classList.add('inactive');
+            document.querySelector('.openStyleMenu .close').classList.remove('inactive');
+            document.querySelector('.styleMenu').classList.add('open');
+        });
+        // close the style menu
+        document.querySelector('.openStyleMenu .close').addEventListener('click', () => {
+            document.querySelector('.openStyleMenu .close').classList.add('inactive');
+            document.querySelector('.openStyleMenu .open').classList.remove('inactive');
+            document.querySelector('.styleMenu').classList.remove('open');
+            if(this.currentColorBeingPicked != 'none'){
+                document.querySelector(`.${this.currentColorBeingPicked}`).classList.remove('selected');
+                this.currentColorBeingPicked = 'none';
+                document.querySelector(".colorPickerUI").classList.add('inactive');
+            }
+        });
+        // border radius adjustment
+        document.querySelector('input[name="borderRadius"]').addEventListener('input', (e) => {
+            const root = document.documentElement;
+            root.style.setProperty('--border-radius', e.target.value + "px");
+        });
+        // click on a color to change
+        document.querySelectorAll(".primaryColor, .secondaryColor, .backgroundColor").forEach(element => element.addEventListener('click', (e) => {
+            if(this.currentColorBeingPicked == 'none'){
+                const selection = e.target.parentNode.parentNode.classList[0];
+                this.currentColorBeingPicked = selection;
+                document.querySelector(`.${this.currentColorBeingPicked}`).classList.add('selected');
+                document.querySelector(".colorPickerUI").classList.remove('inactive');
+                UI.setColorPickerColor();
+            }
+        }));
+        // color picker cancel button
+        document.querySelector(".colorPickerUI .cancel").addEventListener('click', () => {
+            document.querySelector(`.${this.currentColorBeingPicked}`).classList.remove('selected');
+            this.currentColorBeingPicked = 'none';
+            document.querySelector(".colorPickerUI").classList.add('inactive');
+        });
+        // color picker submit button
+        document.querySelector(".colorPickerUI .submit").addEventListener('click', () => {
+            document.querySelector(`.${this.currentColorBeingPicked}`).classList.remove('selected');
+            document.querySelector(".colorPickerUI").classList.add('inactive');
+            UI.pickColor();
+            this.currentColorBeingPicked = 'none';
+        });
+    }
+
+    static setColorPickerColor() {
+        const root = document.documentElement;
+        let newColor;
+
+        if(this.currentColorBeingPicked == 'primaryColor'){
+            newColor = getComputedStyle(root).getPropertyValue('--primary-color');
+        }else if(this.currentColorBeingPicked == 'secondaryColor'){
+            newColor = getComputedStyle(root).getPropertyValue('--secondary-color');
+        }else{ // background color
+            newColor = getComputedStyle(root).getPropertyValue('--background-color');
+        }
+        
+        this.colorPicker.color.rgbString = newColor;
+    }
+
+    static pickColor() {
+        const root = document.documentElement;
+        const newColor = this.colorPicker.color.rgbString;
+
+        if(this.currentColorBeingPicked == 'primaryColor'){
+            root.style.setProperty('--primary-color', newColor);
+        }else if(this.currentColorBeingPicked == 'secondaryColor'){
+            root.style.setProperty('--secondary-color', newColor);
+        }else{ // background color
+            root.style.setProperty('--background-color', newColor);
+        }
     }
 
     static addResizeMenuListeners(){
