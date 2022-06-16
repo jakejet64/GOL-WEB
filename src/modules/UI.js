@@ -126,12 +126,13 @@ export default class UI {
         // new saved style button
         document.querySelector('.saveStyle').addEventListener('click', () => {
             const root = document.documentElement;
-            this.styles.addStyle(new Style(
+            const newStyle = new Style(
                 getComputedStyle(root).getPropertyValue('--primary-color'),
                 getComputedStyle(root).getPropertyValue('--secondary-color'),
                 getComputedStyle(root).getPropertyValue('--background-color'),
                 getComputedStyle(root).getPropertyValue('--border-radius')
-            ));
+            );
+            this.styles.addStyle(newStyle);
             UI.loadSavedStyles();
         });
     }

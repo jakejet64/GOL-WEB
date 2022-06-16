@@ -15,8 +15,8 @@ Menu -> Change the styling of alive & dead cells, background, menu theme, save &
 -    - Pop out menu
 -        - Alive & menu accent, bordering color, background, border radius
 -    - Color Pickers
-    - Presets
-    - Save custom preset
+-    - Presets
+-    - Save custom preset
     - Local Storage custom presets
     - Delete Custom Presets
     - hexagon vs square
