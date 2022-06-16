@@ -72,6 +72,23 @@ body {
     transform: scale(1.075);
 }
 
+.stylesMenu {
+    position: absolute;
+    bottom: calc(40vh + 60px);
+    right: 370px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    background-color: var(--menu-background);
+    border: 3px solid var(--secondary-color);
+    border-radius: calc(var(--border-radius) * 2);
+    padding: 5px;
+    gap: 5px;
+
+    box-shadow: 0px 0px 15px var(--shadow-color);
+}
+
 .styleMenu {
     bottom: calc(40vh - 20px);
     position: absolute;

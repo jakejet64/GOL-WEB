@@ -1,6 +1,8 @@
 import Board from './Board.js';
 // imported color picker
 import iro from '@jaames/iro';
+import StyleSet from './StyleSet.js';
+import Style from './Style.js';
 
 export default class UI {
     static board = new Board(50, Math.round(window.innerWidth / (window.innerHeight / 50)));
@@ -13,8 +15,12 @@ export default class UI {
     static playing = true;
     static colorPicker = new iro.ColorPicker('#picker');
     static currentColorBeingPicked = 'none';
+    static styles = new StyleSet();
 
     static loadHomepage(){
+        UI.addDefaultStyles();
+        UI.loadSavedStyles();
+
         UI.adjustCSSRowsCols();
         UI.addWindowResizeEventListener();
         UI.drawBoard();
@@ -23,12 +29,59 @@ export default class UI {
         UI.addStyleMenuListeners();
     }
 
-    static addStyleMenuListeners(){
+    static addDefaultStyles(){
+        this.styles.addStyle(new Style("rgb(214, 142, 7)", "rgb(255, 255, 255)", "rgb(149, 149, 149)", "5px"));
+        this.styles.addStyle(new Style("rgb(214, 142, 70)", "rgb(0, 0, 0)", "rgb(19, 149, 149)", "2px"));
+        this.styles.addStyle(new Style("rgb(21, 142, 7)", "rgb(100, 100, 100)", "rgb(149, 19, 149)", "10px"));        
+    }
+
+    static loadSavedStyles(){
+        const stylesMenu = document.querySelector('.stylesMenu');
+        stylesMenu.textContent = '';
+        this.styles.getStyles().forEach(style => {
+            const background = document.createElement('div');
+            background.setAttribute('style', `
+                height: 50px;
+                width: 50px;
+                background-color: ${style.getBackground()};
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `);
+            const cell = document.createElement('div');
+            cell.setAttribute('style', `
+                height: 35px;
+                width: 35px;
+                border: 1px solid ${style.getSecondary()};
+                border-radius: ${style.getRadius()};
+                background-color: ${style.getPrimary()};
+            `);
+            background.appendChild(cell);
+            stylesMenu.appendChild(background);
+        });
+        UI.addStylesMenuListeners();
+    }
+
+    static addStylesMenuListeners() {
+        const root = document.documentElement;
+        const styleDivs = document.querySelectorAll('.stylesMenu > div');
+        styleDivs.forEach(styleDiv => {
+            styleDiv.addEventListener('click', () => {
+                root.style.setProperty('--background-color', styleDiv.style.backgroundColor);
+                root.style.setProperty('--primary-color', styleDiv.children[0].style.backgroundColor);
+                root.style.setProperty('--secondary-color', styleDiv.children[0].style.borderColor);
+                root.style.setProperty('--border-radius', styleDiv.children[0].style.borderRadius);
+            });
+        });
+    }
+
+    static addStyleMenuListeners() {
         // open the style menu
         document.querySelector('.openStyleMenu .open').addEventListener('click', () => {
             document.querySelector('.openStyleMenu .open').classList.add('inactive');
             document.querySelector('.openStyleMenu .close').classList.remove('inactive');
             document.querySelector('.styleMenu').classList.add('open');
+            document.querySelector('.stylesMenu').classList.remove('inactive');
         });
         // close the style menu
         document.querySelector('.openStyleMenu .close').addEventListener('click', () => {
@@ -40,6 +93,7 @@ export default class UI {
                 this.currentColorBeingPicked = 'none';
                 document.querySelector(".colorPickerUI").classList.add('inactive');
             }
+            document.querySelector('.stylesMenu').classList.add('inactive');
         });
         // border radius adjustment
         document.querySelector('input[name="borderRadius"]').addEventListener('input', (e) => {
@@ -69,6 +123,17 @@ export default class UI {
             UI.pickColor();
             this.currentColorBeingPicked = 'none';
         });
+        // new saved style button
+        document.querySelector('.saveStyle').addEventListener('click', () => {
+            const root = document.documentElement;
+            this.styles.addStyle(new Style(
+                getComputedStyle(root).getPropertyValue('--primary-color'),
+                getComputedStyle(root).getPropertyValue('--secondary-color'),
+                getComputedStyle(root).getPropertyValue('--background-color'),
+                getComputedStyle(root).getPropertyValue('--border-radius')
+            ));
+            UI.loadSavedStyles();
+        });
     }
 
     static setColorPickerColor() {
@@ -82,7 +147,7 @@ export default class UI {
         }else{ // background color
             newColor = getComputedStyle(root).getPropertyValue('--background-color');
         }
-        
+
         this.colorPicker.color.rgbString = newColor;
     }
 
