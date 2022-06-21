@@ -1,15 +1,15 @@
 import Style from './Style.js';
 
 export default class StyleSet {
-    constructor(){
-        this.styles = [];
-    }
+  constructor() {
+    this.styles = [];
+  }
 
-    addStyle(style){
-        this.styles[this.styles.length] = style;
-    }
+  addStyle(style) {
+    this.styles[this.styles.length] = style;
+  }
 
-    getStyles(){
-        return this.styles;
-    }
+  getStyles() {
+    return this.styles;
+  }
 }
