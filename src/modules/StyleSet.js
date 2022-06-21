@@ -1,4 +1,4 @@
-import Style from './Style.js';
+import Style from "./Style.js";
 
 export default class StyleSet {
   constructor() {

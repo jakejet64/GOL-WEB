@@ -27,14 +27,23 @@ export default class Board {
     const newArr = [];
     for (let checkRow = 0; checkRow < this.boolBoard.length; checkRow++) {
       const tempNewArr = [];
-      for (let checkCol = 0; checkCol < this.boolBoard[checkRow].length; checkCol++) {
-        if (this.boolBoard[checkRow][checkCol]) { // if the cell is currently alive;
-          if (neigborArr[checkRow][checkCol] == 2 || neigborArr[checkRow][checkCol] == 3) {
+      for (
+        let checkCol = 0;
+        checkCol < this.boolBoard[checkRow].length;
+        checkCol++
+      ) {
+        if (this.boolBoard[checkRow][checkCol]) {
+          // if the cell is currently alive;
+          if (
+            neigborArr[checkRow][checkCol] == 2 ||
+            neigborArr[checkRow][checkCol] == 3
+          ) {
             tempNewArr.push(true); // alive with two or 3 neighbors, survives
           } else {
             tempNewArr.push(false); // alive with too many/few neighbors, dies
           }
-        } else { // if the cell is currently dead
+        } else {
+          // if the cell is currently dead
           if (neigborArr[checkRow][checkCol] == 3) {
             tempNewArr.push(true); // dead with three neighbors, comes alive
           } else {
@@ -65,8 +74,12 @@ export default class Board {
     for (let checkRow = row - 1; checkRow < row + 2; checkRow++) {
       for (let checkCol = col - 1; checkCol < col + 2; checkCol++) {
         // is in bounds
-        if (checkRow < this.boolBoard.length && checkRow >= 0
-                    && checkCol < this.boolBoard[checkRow].length && checkCol >= 0) {
+        if (
+          checkRow < this.boolBoard.length &&
+          checkRow >= 0 &&
+          checkCol < this.boolBoard[checkRow].length &&
+          checkCol >= 0
+        ) {
           // isn't the cell itself
           if (!(checkRow == row && checkCol == col)) {
             if (this.boolBoard[checkRow][checkCol]) {

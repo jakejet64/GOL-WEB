@@ -1,139 +1,139 @@
 :root {
-    font-family: sans-serif;
-    font-size: 16px;
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-    
-    --rows: 200;
-    --cols: 100;
+  font-family: sans-serif;
+  font-size: 16px;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
 
-    --primary-color: rgb(214, 142, 7);
-    --secondary-color: rgb(255, 255, 255);
-    --background-color: rgb(149, 149, 149);
+  --rows: 200;
+  --cols: 100;
 
-    --border-radius: 5px;
+  --primary-color: rgb(214, 142, 7);
+  --secondary-color: rgb(255, 255, 255);
+  --background-color: rgb(149, 149, 149);
 
-    --menu-background: rgba(176, 176, 176, 0.857);
-    --shadow-color: rgb(123, 123, 123);
+  --border-radius: 5px;
+
+  --menu-background: rgba(176, 176, 176, 0.857);
+  --shadow-color: rgb(123, 123, 123);
 }
 
 body {
-    margin: inherit;
+  margin: inherit;
 }
 
 .board {
-    margin: 0px;
-    background-color: var(--background-color);
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    grid-template: repeat(var(--rows), 1fr) / repeat(var(--cols), 1fr);
-    gap: 1px;
+  margin: 0px;
+  background-color: var(--background-color);
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template: repeat(var(--rows), 1fr) / repeat(var(--cols), 1fr);
+  gap: 1px;
 }
 
 .alive {
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--secondary-color);
 }
 
 .colorPickerUI {
-    position: absolute;
-    bottom: calc(40vh + 60px);
-    right: 1vw;
+  position: absolute;
+  bottom: calc(40vh + 60px);
+  right: 1vw;
 
-    background-color: var(--menu-background);
-    border: 3px solid var(--secondary-color);
-    border-radius: 170px 170px calc(var(--border-radius) * 2) calc(var(--border-radius) * 2);
-    padding: 15px;
+  background-color: var(--menu-background);
+  border: 3px solid var(--secondary-color);
+  border-radius: 170px 170px calc(var(--border-radius) * 2)
+    calc(var(--border-radius) * 2);
+  padding: 15px;
 
-    box-shadow: 0px 0px 15px var(--shadow-color);
+  box-shadow: 0px 0px 15px var(--shadow-color);
 }
 
 .colorPickerUI .cancel,
 .colorPickerUI .submit {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    bottom: 48px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  bottom: 48px;
 }
 
 .colorPickerUI .cancel {
-    left: 10px;
+  left: 10px;
 }
 
 .colorPickerUI .submit {
-    right: 10px;
+  right: 10px;
 }
 
 .colorPickerUI .cancel:active,
 .colorPickerUI .submit:active {
-    transform: scale(1.075);
+  transform: scale(1.075);
 }
 
 .stylesMenu {
-    position: absolute;
-    bottom: calc(40vh + 60px);
-    right: 370px;
+  position: absolute;
+  bottom: calc(40vh + 60px);
+  right: 370px;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 
-    background-color: var(--menu-background);
-    border: 3px solid var(--secondary-color);
-    border-radius: calc(var(--border-radius) * 2);
-    padding: 5px;
-    gap: 5px;
+  background-color: var(--menu-background);
+  border: 3px solid var(--secondary-color);
+  border-radius: calc(var(--border-radius) * 2);
+  padding: 5px;
+  gap: 5px;
 
-    box-shadow: 0px 0px 15px var(--shadow-color);
+  box-shadow: 0px 0px 15px var(--shadow-color);
 }
 
 .styleMenu {
-    bottom: calc(40vh - 20px);
-    position: absolute;
+  bottom: calc(40vh - 20px);
+  position: absolute;
 
-    display: grid;
-    grid-auto-flow: column;
-    justify-items: center;
-    align-items: center;
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: center;
+  align-items: center;
 
-    /* next two lines center */
-    left: calc(100vw - 95px);
+  /* next two lines center */
+  left: calc(100vw - 95px);
 
-    background-color: var(--menu-background);
-    border: 3px solid var(--secondary-color);
-    border-radius: calc(var(--border-radius) * 2);
+  background-color: var(--menu-background);
+  border: 3px solid var(--secondary-color);
+  border-radius: calc(var(--border-radius) * 2);
 
-    box-shadow: 0px 0px 15px var(--shadow-color);
+  box-shadow: 0px 0px 15px var(--shadow-color);
 }
 
 .selected svg {
-    filter: drop-shadow(0px 0px 10px var(--shadow-color));
-
+  filter: drop-shadow(0px 0px 10px var(--shadow-color));
 }
 
-.styleMenu.open{
-    transform: translateX(-450px);
+.styleMenu.open {
+  transform: translateX(-450px);
 }
 
 .styleMenu div {
-    margin: 5px;
+  margin: 5px;
 }
 
 .openStyleMenu,
 .styleMenuIcon,
 .saveStyle {
-    width: 35px;
-    height: 35px;
+  width: 35px;
+  height: 35px;
 }
 
 .primaryColor,
 .secondaryColor,
 .backgroundColor,
 .borderRadiusIcon {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .openStyleMenu:active,
@@ -141,179 +141,178 @@ body {
 .secondaryColor:active,
 .backgroundColor:active,
 .saveStyle:active {
-    transform: scale(1.075);
+  transform: scale(1.075);
 }
 
 .styleMenu .saveStyle {
-    margin-right: 100px;
+  margin-right: 100px;
 }
 
 .styleMenu .styleMenuIcon,
 .styleMenu .backgroundColor,
 .styleMenu .borderRadius {
-    margin-right: 14px;
+  margin-right: 14px;
 }
 
 .primaryColor svg {
-    fill: var(--primary-color);
+  fill: var(--primary-color);
 }
 
 .secondaryColor svg {
-    fill: var(--secondary-color);
+  fill: var(--secondary-color);
 }
 
 .backgroundColor svg {
-    fill: var(--background-color);
+  fill: var(--background-color);
 }
 
 .resizeMenu {
-    bottom: calc(40vh - 100px);
-    position: absolute;
+  bottom: calc(40vh - 100px);
+  position: absolute;
 
-    display: grid;
-    grid-auto-flow: column;
-    justify-items: center;
-    align-items: center;
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: center;
+  align-items: center;
 
-    /* next two lines center */
-    left: calc(100vw - 95px);
+  /* next two lines center */
+  left: calc(100vw - 95px);
 
-    background-color: var(--menu-background);
-    border: 3px solid var(--secondary-color);
-    border-radius: calc(var(--border-radius) * 2);
+  background-color: var(--menu-background);
+  border: 3px solid var(--secondary-color);
+  border-radius: calc(var(--border-radius) * 2);
 
-    box-shadow: 0px 0px 15px var(--shadow-color);
+  box-shadow: 0px 0px 15px var(--shadow-color);
 }
 
-.resizeMenu.open{
-    transform: translateX(-450px);
+.resizeMenu.open {
+  transform: translateX(-450px);
 }
 
 .resizeMenu div {
-    margin: 5px;
+  margin: 5px;
 }
 
 .rowIcon,
 .colIcon {
-    width: 50px;
-    height: 50px;
-    margin-left: 8px;
+  width: 50px;
+  height: 50px;
+  margin-left: 8px;
 }
 
 .openResizeMenu,
 .resizeMenuIcon,
 .locked {
-    width: 35px;
-    height: 35px;
+  width: 35px;
+  height: 35px;
 }
 
 .resizeMenu .locked {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 
 /* make play/pause button "pop" upon clicking */
 .openResizeMenu:active,
 .locked:active {
-    transform: scale(1.075);
+  transform: scale(1.075);
 }
 
 .playbackMenu {
-    position: absolute;
-    bottom: 1vh;
+  position: absolute;
+  bottom: 1vh;
 
-    display: grid;
-    grid-auto-flow: column;
-    justify-items: center;
-    align-items: center;
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: center;
+  align-items: center;
 
-    /* next two lines center */
-    left: 50%;
-    transform: translate(-50%, 0);
+  /* next two lines center */
+  left: 50%;
+  transform: translate(-50%, 0);
 
+  background-color: var(--menu-background);
+  border: 3px solid var(--secondary-color);
+  border-radius: calc(var(--border-radius) * 2);
 
-    background-color: var(--menu-background);
-    border: 3px solid var(--secondary-color);
-    border-radius: calc(var(--border-radius) * 2);
-
-    box-shadow: 0px 0px 15px rgb(123, 123, 123);
+  box-shadow: 0px 0px 15px rgb(123, 123, 123);
 }
 
 .playbackMenu div {
-    margin: 5px;
+  margin: 5px;
 }
 
 .play,
 .pause {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .playbackMenu .speed {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .speed,
 .refresh {
-    width: 35px;
-    height: 35px;
+  width: 35px;
+  height: 35px;
 }
 
-div svg{
-    fill: var(--secondary-color);
-    margin: 0;
-    width: inherit;
-    height: inherit;
+div svg {
+  fill: var(--secondary-color);
+  margin: 0;
+  width: inherit;
+  height: inherit;
 }
 
 /* make play/pause button "pop" upon clicking */
 .play:active,
 .pause:active,
 .refresh:active {
-    transform: scale(1.075);
+  transform: scale(1.075);
 }
 
 .refresh {
-    position: relative;
-    right: 4px;
+  position: relative;
+  right: 4px;
 }
 
 .playbackSpeed {
-    margin-right: 16px;
+  margin-right: 16px;
 }
 
 .cols {
-    margin-right: 100px;
+  margin-right: 100px;
 }
 
-input[type='range'] {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 4px;
-    border-radius: calc(var(--border-radius) * 2);  
-    background: var(--secondary-color);
-    outline: none;
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: calc(var(--border-radius) * 2);
+  background: var(--secondary-color);
+  outline: none;
 }
 
-input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 100%; 
-    background: var(--primary-color);
-    border: 2px solid var(--secondary-color);
-    cursor: pointer;
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  background: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  cursor: pointer;
 }
-input[type='range']::-webkit-slider-thumb:active {
-    transform: scale(1.075);
-    box-shadow: 0px 0px 10px var(--shadow-color);
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.075);
+  box-shadow: 0px 0px 10px var(--shadow-color);
 }
 
 .grayedOut {
-    filter: grayscale();
-    filter: opacity(.7);
+  filter: grayscale();
+  filter: opacity(0.7);
 }
 
 .inactive {
-    display: none;
+  display: none;
 }

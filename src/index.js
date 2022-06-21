@@ -1,4 +1,4 @@
-import UI from './modules/UI.js';
-import './styles.css';
+import UI from "./modules/UI.js";
+import "./styles.css";
 
-document.addEventListener('DOMContentLoaded', UI.loadHomepage);
+document.addEventListener("DOMContentLoaded", UI.loadHomepage);
